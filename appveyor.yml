@@ -38,5 +38,15 @@ build_script:
  - cl /Ivirtualsmartcard\src\vpcd virtualsmartcard\src\vpcd-config\vpcd-config.c /NODEFAULTLIB:MSVCRTD  /NODEFAULTLIB:MSVCRT virtualsmartcard\src\vpcd-config\local-ip.c ws2_32.lib
  - move    vpcd-config.exe %ARTIFACT%
 
+ - python -m pip install --upgrade pip
+ - python -m pip install virtualenv
+ - python -m pip install -U setuptools
+ - easy_install PyCrypto
+ - pip install pyreadline
+ - pip install pyscard
+ - pip install --egg M2Crypto
+ - pip install pyinstaller
+ - pyinstaller --onefile vicc.py
+
  - 7z a %ARTIFACT%.zip %ARTIFACT%
  - appveyor PushArtifact %ARTIFACT%.zip
