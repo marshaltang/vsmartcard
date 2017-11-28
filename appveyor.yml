@@ -52,7 +52,7 @@ build_script:
  - cl /Ivirtualsmartcard\src\vpcd virtualsmartcard\src\vpcd-config\vpcd-config.c /NODEFAULTLIB:MSVCRTD  /NODEFAULTLIB:MSVCRT virtualsmartcard\src\vpcd-config\local-ip.c ws2_32.lib
  - move    vpcd-config.exe %ARTIFACT%
 
- - bash -c "exec 0</dev/null && cd virtualsmartcard && autoreconf -i && ./configure"
+ - bash -c "exec 0</dev/null && cd virtualsmartcard && autoreconf -i && ./configure HELP2MAN=true"
  - pyinstaller --onefile virtualsmartcard\src\vpicc\vicc.in -i doc\_static\chip.ico --distpath %ARTIFACT%
 
  - 7z a %ARTIFACT%.zip %ARTIFACT%
