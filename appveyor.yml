@@ -10,15 +10,13 @@ install:
      If ($env:Platform -Match "x86") {
        $env:MSBUILD_PLATFORM="x86"
        $env:VCVARS_PLATFORM="x86"
-       $env:ARTIFACT="vpcd_win32"
+       $env:ARTIFACT="virtualsmartcard_win32"
        $env:X64=""
-       $env:OPENSSL="C:\OpenSSL-Win32"
      } Else {
        $env:MSBUILD_PLATFORM="x64"
        $env:VCVARS_PLATFORM="amd64"
-       $env:ARTIFACT="vpcd_win64"
+       $env:ARTIFACT="virtualsmartcard_win64"
        $env:X64="x64\"
-       $env:OPENSSL="C:\OpenSSL-Win64"
      }
  - git submodule update --init --recursive
  
@@ -53,6 +51,7 @@ build_script:
  - move    vpcd-config.exe %ARTIFACT%
 
  - bash -c "cd virtualsmartcard && autoreconf -i && exec 0</dev/null ./configure --enable-libpcsclite HELP2MAN=/usr/bin/true"
+ - bash -c "make install DESTDIR=$ARTIFACT -C virtualsmartcard"
  - pyinstaller --onefile virtualsmartcard\src\vpicc\vicc.py -i doc\_static\chip.ico --distpath %ARTIFACT%
 
  - 7z a %ARTIFACT%.zip %ARTIFACT%
