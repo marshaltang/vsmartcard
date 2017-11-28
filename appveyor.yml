@@ -12,13 +12,13 @@ install:
        $env:VCVARS_PLATFORM="x86"
        $env:ARTIFACT="vpcd_win32"
        $env:X64=""
-       $env:M2CRYPTO="M2Crypto32"
+       $env:OPENSSL="C:\OpenSSL-Win32"
      } Else {
        $env:MSBUILD_PLATFORM="x64"
        $env:VCVARS_PLATFORM="amd64"
        $env:ARTIFACT="vpcd_win64"
        $env:X64="x64\"
-       $env:M2CRYPTO="M2Crypto64"
+       $env:OPENSSL="C:\OpenSSL-Win64"
      }
  - git submodule update --init --recursive
  
@@ -48,7 +48,7 @@ build_script:
  - easy_install PyCrypto
  - pip install pyreadline
  - pip install pyscard
- - pip install --egg %M2CRYPTO%
+ - pip install --global-option="-I%OPENSSL%\include" --egg M2Crypto
  - pip install pyinstaller
  - pyinstaller --onefile vicc.py
 
