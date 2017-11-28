@@ -23,6 +23,8 @@ install:
  # BUGFIX: wdf directory was renamed to 00wdf, rename it back (see github.com/appveyor/ci/issues/414)
  - ps: ren 'C:\Program Files (x86)\Windows Kits\10\include\00wdf' 'wdf'
 
+ - choco install swig
+
  # set Visual Studio 2015 build environment
  - set VSVER=14
  - ps: $env:VSCOMNTOOLS=(Get-Content ("env:VS" + "$env:VSVER" + "0COMNTOOLS"))
