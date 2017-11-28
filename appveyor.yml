@@ -51,7 +51,7 @@ build_script:
  - cl /Ivirtualsmartcard\src\vpcd virtualsmartcard\src\vpcd-config\vpcd-config.c /NODEFAULTLIB:MSVCRTD  /NODEFAULTLIB:MSVCRT virtualsmartcard\src\vpcd-config\local-ip.c ws2_32.lib
  - move    vpcd-config.exe %ARTIFACT%
 
- - pyinstaller --onefile vicc.py
+ - pyinstaller --onefile virtualsmartcard\src\vpicc\vicc.py
 
  - 7z a %ARTIFACT%.zip %ARTIFACT%
  - appveyor PushArtifact %ARTIFACT%.zip
