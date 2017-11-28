@@ -12,11 +12,13 @@ install:
        $env:VCVARS_PLATFORM="x86"
        $env:ARTIFACT="vpcd_win32"
        $env:X64=""
+       $env:M2CRYPTO="M2Crypto32"
      } Else {
        $env:MSBUILD_PLATFORM="x64"
        $env:VCVARS_PLATFORM="amd64"
        $env:ARTIFACT="vpcd_win64"
        $env:X64="x64\"
+       $env:M2CRYPTO="M2Crypto64"
      }
  - git submodule update --init --recursive
  
@@ -41,12 +43,12 @@ build_script:
  - move    vpcd-config.exe %ARTIFACT%
 
  - python -m pip install --upgrade pip
- - python -m pip install virtualenv
- - python -m pip install -U setuptools
+ - pip install virtualenv
+ - pip install -U setuptools
  - easy_install PyCrypto
  - pip install pyreadline
  - pip install pyscard
- - pip install --egg M2Crypto
+ - pip install --egg %M2CRYPTO%
  - pip install pyinstaller
  - pyinstaller --onefile vicc.py
 
