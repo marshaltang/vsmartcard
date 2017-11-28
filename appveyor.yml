@@ -51,7 +51,7 @@ build_script:
  - move    vpcd-config.exe %ARTIFACT%
 
  - bash -c "cd virtualsmartcard && autoreconf -i && exec 0</dev/null ./configure --enable-libpcsclite HELP2MAN=/usr/bin/true"
- - bash -c "make install DESTDIR=$ARTIFACT -C virtualsmartcard"
+ - bash -c "make install DESTDIR=$ARTIFACT -C virtualsmartcard/src/vpicc"
  - pyinstaller --onefile virtualsmartcard\src\vpicc\vicc.py -i doc\_static\chip.ico --distpath %ARTIFACT%
 
  - 7z a %ARTIFACT%.zip %ARTIFACT%
